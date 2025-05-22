@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact - VitaLink</title>
+  <link rel="stylesheet" href="style - Copie.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Open+Sans&display=swap" rel="stylesheet">
+
+  <!-- EmailJS -->
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script>
+    (function() {
+      // 🔐 Mets ta clé publique ici entre guillemets
+      emailjs.init("PMx0pxZDRWbB5ssRj");
+    })();
+  </script>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <h1>VitaLink</h1>
+      <nav>
+        <ul>
+          <li><a href="index - Copie.htm">Accueil</a></li>
+          <li><a href="En savoir plus.html">En savoir plus</a></li>
+          <li><a href="contact.html" class="active">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero hero-secondary">
+    <div class="container">
+      <h2>Contactez-nous</h2>
+      <p>Des questions, des remarques ou besoin d’aide ? Écrivez-nous.</p>
+    </div>
+  </section>
+
+  <section class="contact-form">
+    <div class="container">
+      <form id="contact-form">
+        <label for="nom">Nom</label>
+        <input type="text" id="nom" name="nom" required>
+
+        <label for="email">Adresse e-mail</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+
+        <button type="submit" class="btn">Envoyer</button>
+        <p id="form-message" style="margin-top:15px; color:green;"></p>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 VitaLink. Tous droits réservés.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("contact-form").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      emailjs.sendForm(
+        "service_3towaut", // 🔁 Remplace ici par TON service ID
+        "template_aeijxec", // 🔁 Et ici ton template ID
+        this
+      )
+      .then(function(response) {
+        document.getElementById("contact-form").reset();
+        window.location.href = "merci.html";  // redirection vers la page merci.html
+      }, function(error) {
+        document.getElementById("form-message").innerText = "Erreur lors de l'envoi ❌";
+        console.error("Erreur EmailJS :", error);
+      });
+    });
+  </script>
+
+</body>
+</html>
